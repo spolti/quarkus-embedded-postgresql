@@ -49,22 +49,22 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>io.quarkus</groupId>
-				<artifactId>quarkus-bootstrap-maven-plugin</artifactId>
-				<version>${quarkus.version}</version>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>extension-descriptor</goal>
-						</goals>
-						<configuration>
-							<deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}</deployment>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>io.quarkus</groupId>-->
+<!--				<artifactId>quarkus-bootstrap-maven-plugin</artifactId>-->
+<!--				<version>${quarkus.version}</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<phase>compile</phase>-->
+<!--						<goals>-->
+<!--							<goal>extension-descriptor</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}</deployment>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -81,6 +81,74 @@
 	</build>
 
 	<profiles>
+<!--		<profile>-->
+<!--			<id>default</id>-->
+<!--			<activation>-->
+<!--				<activeByDefault>true</activeByDefault>-->
+<!--			</activation>-->
+<!--			<build>-->
+<!--				<plugins>-->
+<!--					<plugin>-->
+<!--						<groupId>io.quarkus</groupId>-->
+<!--						<artifactId>quarkus-bootstrap-maven-plugin</artifactId>-->
+<!--						<version>${quarkus.version}</version>-->
+<!--						<executions>-->
+<!--							<execution>-->
+<!--								<phase>compile</phase>-->
+<!--								<goals>-->
+<!--									<goal>extension-descriptor</goal>-->
+<!--								</goals>-->
+<!--								<configuration>-->
+<!--									<deployment>${project.groupId}:${project.artifactId}-deployment:${project.version}</deployment>-->
+<!--								</configuration>-->
+<!--							</execution>-->
+<!--						</executions>-->
+<!--					</plugin>-->
+<!--				</plugins>-->
+<!--			</build>-->
+<!--		</profile>-->
+
+		<profile>
+			<id>arm64</id>
+			<activation>
+				<property>
+					<name>arm64</name>
+				</property>
+			</activation>
+			<dependencies>
+				<dependency>
+					<groupId>io.zonky.test.postgres</groupId>
+					<artifactId>embedded-postgres-binaries-linux-arm64v8</artifactId>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.quarkus</groupId>
+						<artifactId>quarkus-bootstrap-maven-plugin</artifactId>
+						<version>${quarkus.version}</version>
+						<executions>
+							<execution>
+								<phase>compile</phase>
+								<goals>
+									<goal>extension-descriptor</goal>
+								</goals>
+								<configuration>
+									<deployment>${project.groupId}:${project.artifactId}-deployment:arm64:${project.version}</deployment>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-jar-plugin</artifactId>
+						<configuration>
+							<classifier>arm64</classifier>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
 		<profile>
 			<id>macos</id>
 			<activation>

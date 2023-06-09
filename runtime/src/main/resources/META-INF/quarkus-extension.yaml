@@ -1,6 +1,6 @@
 name: Embedded PostgreSQL
 description: PostgreSQL with Zonky Embedded Postgres
-metadata:
+artifact:
 #  keywords:
 #    - inmemory-postgresql
 #  guide: ...

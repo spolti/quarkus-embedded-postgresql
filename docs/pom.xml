@@ -17,6 +17,7 @@
             <groupId>io.quarkiverse.embedded.postgresql</groupId>
             <artifactId>quarkus-embedded-postgresql-deployment</artifactId>
             <version>${project.version}</version>
+            <classifier>arm64</classifier>
         </dependency>
     </dependencies>
 
